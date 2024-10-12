@@ -10,5 +10,7 @@ The model was optimized using mean squared error and AdamW.
 This was built using tensorflow and keras, pillow, and matplotlib. 
 
 Total params: 16,555,042 (63.15 MB)
+
 Trainable params: 16,552,002 (63.14 MB)
+
 Non-trainable params: 3,040 (11.88 KB)
