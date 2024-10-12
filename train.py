@@ -40,24 +40,6 @@ def genImage():
     return np.array(ship_im).astype("uint8"), (col, row)
 
 
-def genBox(im, ans, guess=None):
-    # full screens the image to be displayed
-    manager = plt.get_current_fig_manager()
-    manager.full_screen_toggle()
-
-    # conv im to array
-    im = Image.fromarray(im)
-    draw = ImageDraw.Draw(im)
-    draw.rectangle((ans[0]-10, ans[1]-10, ans[0] + 80,
-                   ans[1] + 130), outline="green", width=5)
-
-    if guess is not None:
-        draw.rectangle((guess[0]-10, guess[1]-10, guess[0] + 80,
-                        guess[1] + 130), outline="red", width=5)
-
-    return im
-
-
 def genData(batch_size=24):
 
     while True:
@@ -133,8 +115,6 @@ model.compile(optimizer=keras.optimizers.AdamW(),
 model.summary()
 
 # START TRAINING
-
-# model = keras.models.load_model("waldo_model.keras")
 
 # start timer
 tick = time.time()
