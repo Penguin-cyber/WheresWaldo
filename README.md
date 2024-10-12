@@ -1,9 +1,74 @@
 # WheresWaldo
 A CNN trained to localize Waldo from a specific Where's Waldo Background.
 
-To try the model, run the main.py file. It will load the model I have trained, "waldo_model.keras" and it will test it on randomly generated testing data.
+To try the model yourself, you will have to train it and then test it. You can train it by running train.py and then test it by running test.py. Note that it may take a very long time to train. 
 
-The architecture of the model consists of convolutional layers and dense layers. There are 7 convolutional layers consisting of filters, batch normalizations, and max pooling. There are 3 dense layers. 
+The architecture of the model consists of convolutional layers and dense layers. There are 7 convolutional layers consisting of filters, batch normalizations, and max pooling. There are 3 dense layers. The architecture is as follows.
+
+Model: "sequential"
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━┓
+┃ Layer (type)                         ┃ Output Shape                ┃         Param # ┃
+┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━┩
+│ conv2d (Conv2D)                      │ (None, 768, 1024, 16)       │             448 │
+├──────────────────────────────────────┼─────────────────────────────┼─────────────────┤
+│ batch_normalization                  │ (None, 768, 1024, 16)       │              64 │
+│ (BatchNormalization)                 │                             │                 │
+├──────────────────────────────────────┼─────────────────────────────┼─────────────────┤
+│ max_pooling2d (MaxPooling2D)         │ (None, 384, 512, 16)        │               0 │
+├──────────────────────────────────────┼─────────────────────────────┼─────────────────┤
+│ conv2d_1 (Conv2D)                    │ (None, 384, 512, 32)        │           4,640 │
+├──────────────────────────────────────┼─────────────────────────────┼─────────────────┤
+│ batch_normalization_1                │ (None, 384, 512, 32)        │             128 │
+│ (BatchNormalization)                 │                             │                 │
+├──────────────────────────────────────┼─────────────────────────────┼─────────────────┤
+│ max_pooling2d_1 (MaxPooling2D)       │ (None, 192, 256, 32)        │               0 │
+├──────────────────────────────────────┼─────────────────────────────┼─────────────────┤
+│ conv2d_2 (Conv2D)                    │ (None, 192, 256, 64)        │          18,496 │
+├──────────────────────────────────────┼─────────────────────────────┼─────────────────┤
+│ batch_normalization_2                │ (None, 192, 256, 64)        │             256 │
+│ (BatchNormalization)                 │                             │                 │
+├──────────────────────────────────────┼─────────────────────────────┼─────────────────┤
+│ max_pooling2d_2 (MaxPooling2D)       │ (None, 96, 128, 64)         │               0 │
+├──────────────────────────────────────┼─────────────────────────────┼─────────────────┤
+│ conv2d_3 (Conv2D)                    │ (None, 96, 128, 128)        │          73,856 │
+├──────────────────────────────────────┼─────────────────────────────┼─────────────────┤
+│ batch_normalization_3                │ (None, 96, 128, 128)        │             512 │
+│ (BatchNormalization)                 │                             │                 │
+├──────────────────────────────────────┼─────────────────────────────┼─────────────────┤
+│ max_pooling2d_3 (MaxPooling2D)       │ (None, 48, 64, 128)         │               0 │
+├──────────────────────────────────────┼─────────────────────────────┼─────────────────┤
+│ conv2d_4 (Conv2D)                    │ (None, 48, 64, 256)         │         295,168 │
+├──────────────────────────────────────┼─────────────────────────────┼─────────────────┤
+│ batch_normalization_4                │ (None, 48, 64, 256)         │           1,024 │
+│ (BatchNormalization)                 │                             │                 │
+├──────────────────────────────────────┼─────────────────────────────┼─────────────────┤
+│ max_pooling2d_4 (MaxPooling2D)       │ (None, 24, 32, 256)         │               0 │
+├──────────────────────────────────────┼─────────────────────────────┼─────────────────┤
+│ conv2d_5 (Conv2D)                    │ (None, 24, 32, 512)         │       1,180,160 │
+├──────────────────────────────────────┼─────────────────────────────┼─────────────────┤
+│ batch_normalization_5                │ (None, 24, 32, 512)         │           2,048 │
+│ (BatchNormalization)                 │                             │                 │
+├──────────────────────────────────────┼─────────────────────────────┼─────────────────┤
+│ max_pooling2d_5 (MaxPooling2D)       │ (None, 12, 16, 512)         │               0 │
+├──────────────────────────────────────┼─────────────────────────────┼─────────────────┤
+│ conv2d_6 (Conv2D)                    │ (None, 12, 16, 512)         │       2,359,808 │
+├──────────────────────────────────────┼─────────────────────────────┼─────────────────┤
+│ batch_normalization_6                │ (None, 12, 16, 512)         │           2,048 │
+│ (BatchNormalization)                 │                             │                 │
+├──────────────────────────────────────┼─────────────────────────────┼─────────────────┤
+│ max_pooling2d_6 (MaxPooling2D)       │ (None, 6, 8, 512)           │               0 │
+├──────────────────────────────────────┼─────────────────────────────┼─────────────────┤
+│ flatten (Flatten)                    │ (None, 24576)               │               0 │
+├──────────────────────────────────────┼─────────────────────────────┼─────────────────┤
+│ dense (Dense)                        │ (None, 512)                 │      12,583,424 │
+├──────────────────────────────────────┼─────────────────────────────┼─────────────────┤
+│ dense_1 (Dense)                      │ (None, 64)                  │          32,832 │
+├──────────────────────────────────────┼─────────────────────────────┼─────────────────┤
+│ boxes (Dense)                        │ (None, 2)                   │             130 │
+└──────────────────────────────────────┴─────────────────────────────┴─────────────────┘
+ Total params: 16,555,042 (63.15 MB)
+ Trainable params: 16,552,002 (63.14 MB)
+ Non-trainable params: 3,040 (11.88 KB)
 
 The model was optimized using mean squared error and AdamW. 
 
