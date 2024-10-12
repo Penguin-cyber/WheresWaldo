@@ -3,6 +3,8 @@ A CNN trained to localize Waldo from a specific Where's Waldo Background.
 
 To try the model yourself, you will have to train it and then test it. You can train it by running train.py and then test it by running test.py. Note that it may take a very long time to train. (The keras file I had saved the model too was too large to import into github; it was 194 MB).
 
+You can check out the results of the model in the "Model In Action" file. The green box is what the model should have labeled; the red box is what the model did label. 
+
 The architecture of the model consists of convolutional layers and dense layers. There are 7 convolutional layers consisting of filters, batch normalizations, and max pooling. There are 3 dense layers. You can see the model summary upon running train.py.
 
 The model was optimized using mean squared error and AdamW. 
